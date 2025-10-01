@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /config.json
+Disallow: /.env
+Disallow: /.git/
+Disallow: /.DS_Store
+Disallow: /info.php
+Disallow: /telescope/
+Disallow: /_all_dbs
+Disallow: /login.action
+Disallow: /server-status
+Disallow: /actuator/
+
+Sitemap: https://optima--asx-optima.us-central1.hosted.app/sitemap.xml
