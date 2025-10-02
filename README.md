@@ -1,19 +1,18 @@
 # Optima
 
-A simple web application hosted on Firebase.
+A simple web application hosted on Google Cloud App Engine.
 
 ## Project Structure
 
-- `firebase.json` - Firebase hosting configuration
-- `.firebaserc` - Firebase project configuration
-- `public/` - Static files served by Firebase hosting
+- `app.yaml` - Google Cloud App Engine configuration
+- `public/` - Static files served by App Engine
   - `index.html` - Main application page
   - `404.html` - Custom 404 error page
   - `favicon.svg` - Application icon
   - `robots.txt` - Search engine crawler instructions
   - `sitemap.xml` - Site map for search engines
 
-## Firebase Hosting Features
+## App Engine Features
 
 - **Rewrite Rules**: Automatically redirects `/favicon.ico` requests to `/favicon.svg`
 - **SPA Support**: All routes are redirected to `index.html` for single-page application behavior
@@ -23,11 +22,15 @@ A simple web application hosted on Firebase.
 
 ## Deployment
 
-To deploy this application to Firebase:
+To deploy this application to Google Cloud App Engine:
 
-1. Install the Firebase CLI: `npm install -g firebase-tools`
-2. Login to Firebase: `firebase login`
-3. Deploy: `firebase deploy`
+1. Install the Google Cloud SDK: [https://cloud.google.com/sdk/docs/install](https://cloud.google.com/sdk/docs/install)
+2. Initialize gcloud: `gcloud init`
+3. Create a new project or select an existing one: `gcloud projects create [PROJECT_ID]` or `gcloud config set project [PROJECT_ID]`
+4. Deploy: `gcloud app deploy`
+5. View your application: `gcloud app browse`
+
+**Note**: The first deployment will prompt you to select a region for your App Engine application. Choose the region closest to your users.
 
 ## Development
 

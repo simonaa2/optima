@@ -1,0 +1,65 @@
+runtime: python39
+
+handlers:
+# Serve favicon.svg for favicon.ico requests
+- url: /favicon.ico
+  static_files: public/favicon.svg
+  upload: public/favicon.svg
+  mime_type: image/svg+xml
+  http_headers:
+    Cache-Control: 'max-age=31536000'
+
+# Serve static image files with caching
+- url: /(.*\.(ico|jpg|jpeg|png|gif|webp|svg))
+  static_files: public/\1
+  upload: public/.*\.(ico|jpg|jpeg|png|gif|webp|svg)
+  http_headers:
+    Cache-Control: 'max-age=31536000'
+    X-Content-Type-Options: 'nosniff'
+    X-Frame-Options: 'DENY'
+    X-XSS-Protection: '1; mode=block'
+
+# Serve robots.txt
+- url: /robots.txt
+  static_files: public/robots.txt
+  upload: public/robots.txt
+  http_headers:
+    X-Content-Type-Options: 'nosniff'
+    X-Frame-Options: 'DENY'
+    X-XSS-Protection: '1; mode=block'
+
+# Serve sitemap.xml
+- url: /sitemap.xml
+  static_files: public/sitemap.xml
+  upload: public/sitemap.xml
+  mime_type: application/xml
+  http_headers:
+    X-Content-Type-Options: 'nosniff'
+    X-Frame-Options: 'DENY'
+    X-XSS-Protection: '1; mode=block'
+
+# Serve 404.html for not found errors
+- url: /404.html
+  static_files: public/404.html
+  upload: public/404.html
+  http_headers:
+    X-Content-Type-Options: 'nosniff'
+    X-Frame-Options: 'DENY'
+    X-XSS-Protection: '1; mode=block'
+
+# Serve all other requests with index.html (SPA support)
+- url: /.*
+  static_files: public/index.html
+  upload: public/index.html
+  http_headers:
+    X-Content-Type-Options: 'nosniff'
+    X-Frame-Options: 'DENY'
+    X-XSS-Protection: '1; mode=block'
+
+error_handlers:
+- file: public/404.html
+  error_code: over_quota
+- file: public/404.html
+  error_code: dos_api_denial
+- file: public/404.html
+  error_code: timeout

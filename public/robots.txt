@@ -10,4 +10,4 @@ Disallow: /login.action
 Disallow: /server-status
 Disallow: /actuator/
 
-Sitemap: https://optima--asx-optima.us-central1.hosted.app/sitemap.xml
+Sitemap: https://your-app-name.uc.r.appspot.com/sitemap.xml
