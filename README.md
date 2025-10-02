@@ -1,11 +1,14 @@
 # Optima
 
-A simple web application hosted on Google Cloud App Engine.
+A simple web application that can be deployed to Google Cloud App Engine or Cloud Run.
 
 ## Project Structure
 
 - `app.yaml` - Google Cloud App Engine configuration
-- `public/` - Static files served by App Engine
+- `Dockerfile` - Docker configuration for Cloud Run deployment
+- `nginx.conf` - Nginx server configuration
+- `cloudbuild.yaml` - Google Cloud Build configuration
+- `public/` - Static files served by the application
   - `index.html` - Main application page
   - `404.html` - Custom 404 error page
   - `favicon.svg` - Application icon
@@ -22,7 +25,33 @@ A simple web application hosted on Google Cloud App Engine.
 
 ## Deployment
 
-To deploy this application to Google Cloud App Engine:
+### Option 1: Google Cloud Run (using Docker)
+
+To deploy using Cloud Build and Cloud Run:
+
+1. Install the Google Cloud SDK: [https://cloud.google.com/sdk/docs/install](https://cloud.google.com/sdk/docs/install)
+2. Initialize gcloud: `gcloud init`
+3. Create a new project or select an existing one: `gcloud projects create [PROJECT_ID]` or `gcloud config set project [PROJECT_ID]`
+4. Enable required APIs:
+   ```bash
+   gcloud services enable cloudbuild.googleapis.com run.googleapis.com
+   ```
+5. Submit the build to Cloud Build:
+   ```bash
+   gcloud builds submit --config cloudbuild.yaml
+   ```
+
+The `cloudbuild.yaml` configuration will:
+- Build a Docker image from the Dockerfile
+- Push the image to Google Container Registry
+- Deploy the image to Cloud Run
+- Make the service publicly accessible
+
+**Note**: The deployment region is set to `us-central1` in `cloudbuild.yaml`. You can change this to a region closer to your users.
+
+### Option 2: Google Cloud App Engine
+
+To deploy directly to App Engine (without Docker):
 
 1. Install the Google Cloud SDK: [https://cloud.google.com/sdk/docs/install](https://cloud.google.com/sdk/docs/install)
 2. Initialize gcloud: `gcloud init`
