@@ -61,6 +61,15 @@ To deploy directly to App Engine (without Docker):
 
 **Note**: The first deployment will prompt you to select a region for your App Engine application. Choose the region closest to your users.
 
+### Post-Deployment Configuration
+
+After deploying your application, update the following files with your actual domain:
+
+1. **public/sitemap.xml**: Update the `<loc>` tag with your actual domain URL
+2. **public/robots.txt**: Uncomment and update the Sitemap URL with your actual domain
+
+This ensures search engines can properly index your site.
+
 ## Development
 
 The application serves a simple welcome page with a modern gradient design. All missing resources are handled gracefully to prevent 404 errors in server logs.
